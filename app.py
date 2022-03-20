@@ -1,15 +1,6 @@
+import csv
 import streamlit as st
 import streamlit.components.v1 as components
-
-st.subheader("【伝説】幻の十文字大根、収穫してみた！")
-st.video('https://youtu.be/aaFhoLlEkIQ') 
-
-components.html(
-    """
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/aaFhoLlEkIQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    """,
-    height=315,
-)
 
 
 hide_streamlit_style = """
@@ -19,3 +10,13 @@ hide_streamlit_style = """
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+filename = "yt-videos.csv"
+
+st.title("農業ユーチューブ")
+
+with open(filename, "r") as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        st.subheader(row[0])
+        st.video(row[2])
